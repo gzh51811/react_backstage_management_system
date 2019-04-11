@@ -337,7 +337,6 @@ layui.use('upload', function(){
                 if(xhr.status == 200){
                   // JSON.parse(
                     let res = JSON.parse(xhr.responseText);
-                    console.log(res);
                     layer.confirm(res.msg,function(){
                       layer.close();
                     });
@@ -370,7 +369,9 @@ var  selection=document.querySelector('select');
 judgebtn.onclick=function(){
   // console.log(123456,currentimgurl);
   // console.log(selection.options[selection.selectedIndex].text);
+      
     var res_data={
+        _id:params,
         goods_id: addid.value,
         goods_name: addname.value,
         // pricing: addoprice.value,
@@ -410,6 +411,7 @@ layui.use('element', function(){
   var element = layui.element;
   
 });
+
 </script>
 </body>
 </html>
