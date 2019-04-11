@@ -17,7 +17,6 @@ router.get('/',async (ctx,next)=>{
     let allcountlength=await db.find('goodslist',{});
     let res = await db.slices('goodslist',(page-1)*limit,limit*1,{});
     let sortarr=await db.sortfind('goodslist',{'salenum':-1},{});
-    console.log(sortarr);
     sortarr.map((item)=>{
       var a=new Date(item.goods_edittime*1000);
       item.goods_edittime=a.toLocaleDateString().replace(/\//g, "-") + " " + a.toTimeString().substr(0, 8)

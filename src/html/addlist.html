@@ -245,25 +245,24 @@ var username = document.getElementById('username');
                   // JSON.parse(
                     let res = JSON.parse(xhr.responseText);
                     // console.log(res.data);
-                    currentimgurl=res.data.img.slice(7,);
+                    currentimgurl=res.data.goods_image.slice(7,);
                     if(res.code=='0'){
                       
-                      addid.value=res.data.gid;
-                      addname.value=res.data.title;
-                      addpprice.value=res.data.sellingPrice;
-                      addoprice.value=res.data.pricing;
+                      addid.value=res.data.goods_id;
+                      addname.value=res.data.goods_name;
+                      addpprice.value=res.data.goods_price;
+                      // addoprice.value=res.data.pricing;
                       // addclassify.value=res.data.cid;
-                      addsalenum.value=res.data.repertory;
-                      addbuynum.value=res.data.salenum;
-                      date.value=res.data.uploadtime;
+                      addsalenum.value=res.data.user_goods_limit_num;
+                      addbuynum.value=res.data.goods_salenum;
+                      date.value=res.data.goods_edittime;
                       
-                      classifyname.innerHTML=res.data.classify;
+                      classifyname.innerHTML=res.data.gc_id_1_name;
                       var imgbtn=document.querySelector('#demo2');
                       var $ = layui.jquery
-                      $('#demo2').append('<div class="dv" style="display:inline-block;"><img src="'+ res.data.img +'" alt="'+res.data.img.slice(7,)+'" class="layui-upload-img"><i class="closeimg closeimg1 ">&times</i></div>');
+                      $('#demo2').append('<div class="dv" style="display:inline-block;"><img src="'+ res.data.goods_image +'" alt="'+res.data.goods_image.slice(7,)+'" class="layui-upload-img"><i class="closeimg closeimg1 ">&times</i></div>');
                       var closeimg=document.querySelector('.closeimg');
                       closeimg.onclick=function(){
-                        console.log('6666');
                        closeimg.parentElement.parentElement.removeChild(closeimg.parentElement);
                       }
                     }
@@ -316,7 +315,7 @@ layui.use('upload', function(){
             e.target.parentElement.style.border='1px solid #000';
             var currentimgsrc=e.target.getAttribute('alt');
             currentimgurl=currentimgsrc;
-            // console.log(currentimgsrc);
+            console.log(currentimgsrc);
             
           };
 
@@ -332,7 +331,6 @@ layui.use('upload', function(){
           
             var imgalt=e.target.previousSibling.getAttribute('alt');
             e.target.parentElement.parentElement.removeChild(e.target.parentElement);
-            console.log(imgalt);
             // 删除错误图片
             let xhr = new XMLHttpRequest();
             xhr.onload = ()=>{
@@ -373,18 +371,17 @@ judgebtn.onclick=function(){
   // console.log(123456,currentimgurl);
   // console.log(selection.options[selection.selectedIndex].text);
     var res_data={
-        _id: params,
-        gid: addid.value,
-        title: addname.value,
-        pricing: addoprice.value,
-        sellingPrice: addpprice.value,
-        repertory: addsalenum.value,
-        classify: selection.options[selection.selectedIndex].text,
-        salenum: Number(addbuynum.value),
-        uploadtime: date.value,
-        img: '../img/'+currentimgurl 
+        goods_id: addid.value,
+        goods_name: addname.value,
+        // pricing: addoprice.value,
+        goods_price: addpprice.value,
+        user_goods_limit_num: addsalenum.value,
+        gc_id_1_name: selection.options[selection.selectedIndex].text,
+        goods_salenum: Number(addbuynum.value),
+        goods_edittime: date.value,
+        goods_image: '../img/'+currentimgurl 
     }
-    console.log(res_data);
+    // console.log(res_data);
     let xhr = new XMLHttpRequest();
       xhr.onload = ()=>{
           if(xhr.status == 200){
